@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ScrollView } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons'; 
+
 import { database } from '../database/database';
 
 const categorias = ['Alimentação', 'Transporte', 'Lazer', 'Estudos', 'Contas', 'Saúde', 'Outros'];
@@ -50,6 +51,25 @@ export default function AddExpenseScreen({ navigation, route }: Props) {
     setValorFormatado(formatado);
   };
 
+  const formatarDataInput = (texto: string) => {
+    let apenasNumeros = texto.replace(/\D/g, '');
+    
+    if (apenasNumeros.length === 0) return '';
+
+    if (apenasNumeros.length <= 2) {
+      return apenasNumeros;
+    }
+    if (apenasNumeros.length <= 4) {
+      return `${apenasNumeros.slice(0, 2)}/${apenasNumeros.slice(2)}`;
+    }
+    return `${apenasNumeros.slice(0, 2)}/${apenasNumeros.slice(2, 4)}/${apenasNumeros.slice(4, 8)}`;
+  };
+
+  const onChangeData = (texto: string) => {
+    const dataComMascara = formatarDataInput(texto);
+    setDataBR(dataComMascara);
+  };
+
   const getValorNumerico = () => {
     return parseFloat(valorFormatado.replace(/\./g, '').replace(',', '.')) || 0;
   };
@@ -66,6 +86,11 @@ export default function AddExpenseScreen({ navigation, route }: Props) {
       return;
     }
 
+    if (dataBR.length < 10) {
+      Alert.alert('Erro', 'Insira uma data válida no formato DD/MM/AAAA!');
+      return;
+    }
+
     const dataISO = dataBR.split('/').reverse().join('-');
 
     if (isEditing) {
@@ -74,7 +99,7 @@ export default function AddExpenseScreen({ navigation, route }: Props) {
       database.insert(descricao, categoria, valorNum, dataISO);
     }
 
-    Alert.alert('Sucesso!', isEditing ? 'Gasto updated!' : 'Gasto cadastrado!', [
+    Alert.alert('Sucesso!', isEditing ? 'Gasto atualizado!' : 'Gasto cadastrado!', [
       { text: 'OK', onPress: () => navigation.goBack() }
     ]);
   };
@@ -120,10 +145,11 @@ export default function AddExpenseScreen({ navigation, route }: Props) {
           style={styles.input}
           placeholder="20/05/2026"
           value={dataBR}
-          onChangeText={setDataBR}
+          onChangeText={onChangeData} 
           keyboardType="numeric"
-          maxLength={10}
+          maxLength={10} 
         />
+
         <TouchableOpacity style={styles.saveButton} onPress={salvarGasto}>
           <View style={styles.buttonContent}>
             <FontAwesome 
