@@ -15,7 +15,6 @@ type Props = {
   onDelete: (id: number) => void;
   onEdit?: (gasto: Gasto) => void;
   formatarData?: (data: string) => string;
-  key?: React.Key;        
 };
 
 const ExpenseItem: React.FC<Props> = ({ item, onDelete, onEdit, formatarData }) => {
@@ -29,7 +28,6 @@ const ExpenseItem: React.FC<Props> = ({ item, onDelete, onEdit, formatarData }) 
       </View>
 
       <View style={styles.valorContainer}>
-        {/* Força a exibição da moeda com vírgula dentro do card também */}
         <Text style={styles.valor}>R$ {item.valor.toFixed(2).replace('.', ',')}</Text>
         <Text style={styles.data}>{dataFormatada}</Text>
       </View>
@@ -55,30 +53,54 @@ const ExpenseItem: React.FC<Props> = ({ item, onDelete, onEdit, formatarData }) 
 };
 
 const styles = StyleSheet.create({
-  card: {
-    backgroundColor: '#1A1A1A',
-    borderRadius: 16,
-    padding: 16,
-    marginVertical: 8,
-    marginHorizontal: 16,
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#D4AF37',
+  card: { 
+    backgroundColor: '#1A1A1A', 
+    borderRadius: 16, 
+    padding: 16, 
+    marginVertical: 8, 
+    marginHorizontal: 16, 
+    flexDirection: 'row', 
+    alignItems: 'center', 
+    borderWidth: 1, 
+    borderColor: '#D4AF37' 
   },
-  info: { flex: 1 },
-  descricao: { color: '#FFFFFF', fontSize: 17, fontWeight: '600' },
-  categoria: { color: '#D4AF37', fontSize: 14, marginTop: 4 },
-  valorContainer: { alignItems: 'flex-end', marginRight: 12 },
-  valor: { color: '#D4AF37', fontSize: 18, fontWeight: 'bold' },
-  data: { color: '#888', fontSize: 13 },
+  info: { 
+    flex: 1 
+  },
+  descricao: { 
+    color: '#FFFFFF', 
+    fontSize: 17, 
+    fontWeight: '600' 
+  },
+  categoria: { 
+    color: '#D4AF37', 
+    fontSize: 14, 
+    marginTop: 4 
+  },
+  valorContainer: { 
+    alignItems: 'flex-end', 
+    marginRight: 12 
+  },
+  valor: { 
+    color: '#D4AF37', 
+    fontSize: 18, 
+    fontWeight: 'bold' 
+  },
+  data: { 
+    color: '#888', 
+    fontSize: 13 
+  },
   actions: { 
     flexDirection: 'row', 
     gap: 14, 
     alignItems: 'center' 
   },
-  editBtn: { padding: 4 },
-  deleteBtn: { padding: 4 },
+  editBtn: { 
+    padding: 4 
+  },
+  deleteBtn: { 
+    padding: 4 
+  },
 });
 
 export default ExpenseItem;

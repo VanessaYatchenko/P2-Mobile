@@ -34,31 +34,23 @@ export default function AddExpenseScreen({ navigation, route }: Props) {
   const formatarValor = (texto: string) => {
     let valor = texto.replace(/\D/g, ''); 
     if (valor.length === 0) return '';
-
     valor = parseInt(valor, 10).toString();
-
     if (valor === '0') return '0,00';
     if (valor.length === 1) return `0,0${valor}`;
     if (valor.length === 2) return `0,${valor}`;
-    
     const inteiro = valor.slice(0, -2);
     const decimal = valor.slice(-2);
     return `${inteiro},${decimal}`;
   };
 
   const onChangeValor = (texto: string) => {
-    const formatado = formatarValor(texto);
-    setValorFormatado(formatado);
+    setValorFormatado(formatarValor(texto));
   };
 
   const formatarDataInput = (texto: string) => {
     let apenasNumeros = texto.replace(/\D/g, '');
-    
     if (apenasNumeros.length === 0) return '';
-
-    if (apenasNumeros.length <= 2) {
-      return apenasNumeros;
-    }
+    if (apenasNumeros.length <= 2) return apenasNumeros;
     if (apenasNumeros.length <= 4) {
       return `${apenasNumeros.slice(0, 2)}/${apenasNumeros.slice(2)}`;
     }
@@ -66,8 +58,7 @@ export default function AddExpenseScreen({ navigation, route }: Props) {
   };
 
   const onChangeData = (texto: string) => {
-    const dataComMascara = formatarDataInput(texto);
-    setDataBR(dataComMascara);
+    setDataBR(formatarDataInput(texto));
   };
 
   const getValorNumerico = () => {
@@ -145,22 +136,15 @@ export default function AddExpenseScreen({ navigation, route }: Props) {
           style={styles.input}
           placeholder="20/05/2026"
           value={dataBR}
-          onChangeText={onChangeData} 
+          onChangeText={onChangeData}
           keyboardType="numeric"
-          maxLength={10} 
+          maxLength={10}
         />
 
         <TouchableOpacity style={styles.saveButton} onPress={salvarGasto}>
           <View style={styles.buttonContent}>
-            <FontAwesome 
-              name="save" 
-              size={22} 
-              color="#000000" 
-              style={styles.buttonIcon} 
-            />
-            <Text style={styles.saveButtonText}>
-              {isEditing ? 'Atualizar Gasto' : 'Salvar Gasto'}
-            </Text>
+            <FontAwesome name="save" size={22} color="#000000" style={styles.buttonIcon} />
+            <Text style={styles.saveButtonText}>{isEditing ? 'Atualizar Gasto' : 'Salvar Gasto'}</Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -169,52 +153,68 @@ export default function AddExpenseScreen({ navigation, route }: Props) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#0A0A0A' },
-  form: { padding: 20 },
-  label: { color: '#D4AF37', fontSize: 16, marginTop: 16, marginBottom: 6, fontWeight: '500' },
-  input: {
-    backgroundColor: '#1A1A1A',
-    color: '#FFFFFF',
-    padding: 14,
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: '#D4AF37',
-    fontSize: 16,
+  container: { 
+    flex: 1, 
+    backgroundColor: '#0A0A0A' 
   },
-  categoriasContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 8,
-    marginVertical: 10,
+  form: { 
+    padding: 20 
   },
-  catButton: {
-    backgroundColor: '#1A1A1A',
-    paddingHorizontal: 16,
-    paddingVertical: 10,
-    borderRadius: 20,
-    borderWidth: 1,
-    borderColor: '#333',
+  label: { 
+    color: '#D4AF37', 
+    fontSize: 16, 
+    marginTop: 16, 
+    marginBottom: 6, 
+    fontWeight: '500' 
   },
-  catSelected: {
-    backgroundColor: '#D4AF37',
-    borderColor: '#D4AF37',
+  input: { 
+    backgroundColor: '#1A1A1A', 
+    color: '#FFFFFF', 
+    padding: 14, 
+    borderRadius: 12, 
+    borderWidth: 1, 
+    borderColor: '#D4AF37', 
+    fontSize: 16 
   },
-  catText: { color: '#CCC' },
-  catTextSelected: { color: '#000', fontWeight: 'bold' },
-  saveButton: {
-    backgroundColor: '#D4AF37',
-    padding: 18,
-    borderRadius: 12,
-    alignItems: 'center',
-    marginTop: 30,
+  categoriasContainer: { 
+    flexDirection: 'row', 
+    flexWrap: 'wrap', 
+    gap: 8, 
+    marginVertical: 10 
   },
-  buttonContent: {
-    flexDirection: 'row',   
-    alignItems: 'center',     
-    justifyContent: 'center',  
+  catButton: { 
+    backgroundColor: '#1A1A1A', 
+    paddingHorizontal: 16, 
+    paddingVertical: 10, 
+    borderRadius: 20, 
+    borderWidth: 1, 
+    borderColor: '#333' 
   },
-  buttonIcon: {
-    marginRight: 10,         
+  catSelected: { 
+    backgroundColor: '#D4AF37', 
+    borderColor: '#D4AF37' 
+  },
+  catText: { 
+    color: '#CCC' 
+  },
+  catTextSelected: { 
+    color: '#000', 
+    fontWeight: 'bold' 
+  },
+  saveButton: { 
+    backgroundColor: '#D4AF37', 
+    padding: 18, 
+    borderRadius: 12, 
+    alignItems: 'center', 
+    marginTop: 30 
+  },
+  buttonContent: { 
+    flexDirection: 'row', 
+    alignItems: 'center', 
+    justifyContent: 'center' 
+  },
+  buttonIcon: { 
+    marginRight: 10 
   },
   saveButtonText: { 
     color: '#000', 

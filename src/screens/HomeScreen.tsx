@@ -33,9 +33,17 @@ export default function HomeScreen({ navigation }: any) {
 
   const carregarDados = () => {
     const dados = database.getAll() as Gasto[];
-    setGastos(dados);
     
-    const novoTotal = dados.reduce((acc, item) => acc + item.valor, 0);
+    const dadosOrdenados = dados.sort((a, b) => {
+      if (b.data === a.data) {
+        return b.id - a.id; 
+      }
+      return new Date(b.data).getTime() - new Date(a.data).getTime();
+    });
+
+    setGastos(dadosOrdenados);
+    
+    const novoTotal = dadosOrdenados.reduce((acc, item) => acc + item.valor, 0);
     setTotal(novoTotal);
   };
 
@@ -90,7 +98,7 @@ export default function HomeScreen({ navigation }: any) {
           <View style={styles.emptyContainer}>
             <Text style={styles.empty}>
               {categoriaSelecionada === 'Todos' 
-                ? 'Olha, não tem nenhum gasto cadastrado ainda.' 
+                ? 'Ops, não tem nenhum gasto cadastrado ainda.' 
                 : `Nenhum gasto encontrado na categoria "${categoriaSelecionada}".`}
             </Text>
           </View>
@@ -124,7 +132,10 @@ export default function HomeScreen({ navigation }: any) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#0A0A0A' },
+  container: { 
+    flex: 1, 
+    backgroundColor: '#0A0A0A' 
+  },
   totalBox: { 
     backgroundColor: '#1A1A1A', 
     padding: 25, 
@@ -132,42 +143,56 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2, 
     borderBottomColor: '#D4AF37' 
   },
-  totalLabel: { color: '#D4AF37', fontSize: 16 },
-  totalValue: { color: '#FFF', fontSize: 34, fontWeight: 'bold', marginTop: 8 },
-  
-  sectionTitle: {
-    color: '#D4AF37',
-    fontSize: 14,
-    fontWeight: '500',
-    marginLeft: 16,
-    marginTop: 16,
-    marginBottom: 4,
+  totalLabel: { 
+    color: '#D4AF37', 
+    fontSize: 16 
   },
-  filterContainer: {
-    marginBottom: 10,
-    height: 45,
+  totalValue: { 
+    color: '#FFF', 
+    fontSize: 34, 
+    fontWeight: 'bold', 
+    marginTop: 8 
   },
-  scrollFilter: {
-    paddingHorizontal: 16,
-    gap: 8,
+  sectionTitle: { 
+    color: '#D4AF37', 
+    fontSize: 14, 
+    fontWeight: '500', 
+    marginLeft: 16, 
+    marginTop: 16, 
+    marginBottom: 4 
   },
-  filterButton: {
-    backgroundColor: '#1A1A1A',
-    paddingHorizontal: 16,
-    justifyContent: 'center',
-    borderRadius: 20,
-    borderWidth: 1,
-    borderColor: '#333',
-    height: 40,
+  filterContainer: { 
+    marginBottom: 10, 
+    height: 45 
   },
-  filterButtonSelected: {
-    backgroundColor: '#D4AF37',
-    borderColor: '#D4AF37',
+  scrollFilter: { 
+    paddingHorizontal: 16, 
+    gap: 8 
   },
-  filterText: { color: '#CCC', fontSize: 14 },
-  filterTextSelected: { color: '#000', fontWeight: 'bold' },
-
-  listContainer: { flex: 1 },
+  filterButton: { 
+    backgroundColor: '#1A1A1A', 
+    paddingHorizontal: 16, 
+    justifyContent: 'center', 
+    borderRadius: 20, 
+    borderWidth: 1, 
+    borderColor: '#333', 
+    height: 40 
+  },
+  filterButtonSelected: { 
+    backgroundColor: '#D4AF37', 
+    borderColor: '#D4AF37' 
+  },
+  filterText: { 
+    color: '#CCC', 
+    fontSize: 14 
+  },
+  filterTextSelected: { 
+    color: '#000', 
+    fontWeight: 'bold' 
+  },
+  listContainer: { 
+    flex: 1 
+  },
   emptyContainer: { 
     flex: 1, 
     justifyContent: 'center', 
@@ -177,8 +202,8 @@ const styles = StyleSheet.create({
   empty: { 
     color: '#777', 
     fontSize: 16, 
-    textAlign: 'center',
-    paddingHorizontal: 20
+    textAlign: 'center', 
+    paddingHorizontal: 20 
   },
   addBtn: { 
     backgroundColor: '#D4AF37', 
@@ -187,17 +212,20 @@ const styles = StyleSheet.create({
     borderRadius: 12, 
     alignItems: 'center' 
   },
-  addBtnText: { color: '#000', fontSize: 18, fontWeight: 'bold' },
-  
-  footerContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 20,
-    marginTop: 20,
+  addBtnText: { 
+    color: '#000', 
+    fontSize: 18, 
+    fontWeight: 'bold' 
   },
-  footerText: {
-    color: '#555555',
-    fontSize: 12,
-    fontWeight: '400',
+  footerContainer: { 
+    alignItems: 'center', 
+    justifyContent: 'center', 
+    paddingVertical: 20, 
+    marginTop: 20 
+  },
+  footerText: { 
+    color: '#555555', 
+    fontSize: 12, 
+    fontWeight: '400' 
   },
 });
