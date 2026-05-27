@@ -22,7 +22,9 @@ Antes de começar, você vai precisar ter instalado em sua máquina:
 Acesse a pasta do projeto no terminal, baixe as dependências e rode o aplicativo:
 
 cd P2-Mobile
+
 npm install
+
 npx expo start
 
 Depois de rodar o comando, basta escanear o QR Code com o aplicativo Expo Go no seu celular ou pressionar a para abrir no emulador Android.
