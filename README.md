@@ -1,11 +1,31 @@
-# Sample Snack app
+# P2 - Desenvolvimento Mobile
 
-Open the `App.js` file to start writing some code. You can preview the changes directly on your phone or tablet by scanning the **QR code** or use the iOS or Android emulators. When you're done, click **Save** and share the link!
+Este repositório contém o projeto desenvolvido para a avaliação P2 da disciplina de Desenvolvimento Mobile.
 
-When you're ready to see everything that Expo provides (or if you want to use your own editor) you can **Download** your project and use it with [expo cli](https://docs.expo.dev/get-started/installation/#expo-cli)).
+## Sobre o Projeto
+O projeto consiste em um aplicativo mobile desenvolvido com foco em usabilidade e persistência de dados local.
 
-All projects created in Snack are publicly available, so you can easily share the link to this project via link, or embed it on a web page with the `<>` button.
+---
 
-If you're having problems, you can tweet to us [@expo](https://twitter.com/expo) or ask in our [forums](https://forums.expo.dev/c/expo-dev-tools/61) or [Discord](https://chat.expo.dev/).
+## Instruções de Execução
 
-Snack is Open Source. You can find the code on the [GitHub repo](https://github.com/expo/snack).
+Siga os passos abaixo para rodar o projeto localmente na sua máquina.
+
+### Pré-requisitos
+Antes de começar, você vai precisar ter instalado em sua máquina:
+* Node.js
+* Gerenciador de pacotes (NPM, Yarn ou Bun)
+* Um emulador configurado (Android Studio / Xcode) ou o aplicativo Expo Go instalado no seu celular físico.
+
+### Passo a Passo
+
+Acesse a pasta do projeto no terminal, baixe as dependências e rode o aplicativo:
+
+cd P2-Mobile
+npm install
+npx expo start
+
+Depois de rodar o comando, basta escanear o QR Code com o aplicativo Expo Go no seu celular ou pressionar a para abrir no emulador Android.
+
+👤 Criador
+Vanessa Macedo
